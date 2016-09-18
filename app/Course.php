@@ -5,15 +5,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Classes extends Model
+class Course extends Model
 {
 
     /**
-     * refercences the questions table
+     * refercences the courses table
      *
      * @var string
      */
-    protected  $table = "classes";
+    protected  $table = "courses";
 
 
     /**
@@ -22,7 +22,7 @@ class Classes extends Model
      * @var array
      */
     protected  $fillable = [
-        'name'
+        'title', 'description', 'class_id'
     ];
 
 
@@ -32,6 +32,7 @@ class Classes extends Model
      * @var array
      */
     protected  $hidden = [
-        'created_at', 'updated_at'
+        'created_at', 'updated_at', 'class_id'
     ];
+
 }
