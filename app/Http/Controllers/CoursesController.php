@@ -7,9 +7,27 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Course;
+use App\Helper\Transformer\CourseTransformer;
 
-class CoursesController extends Controller
+class CoursesController extends ApiController
 {
+
+
+    private $courseTransformer;
+
+
+    /**
+     *
+     *
+     * CoursesController constructor.
+     * @param $courseTransformer
+     */
+    public function __construct(CourseTransformer $courseTransformer)
+    {
+        $this->courseTransformer = $courseTransformer;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +36,13 @@ class CoursesController extends Controller
     public function index()
     {
 
-        return response()->json([
-            'data' => $this->transformCollection(Course::all())
-        ], 200);
+        return $this->respond([
+
+            'data' => $this->courseTransformer->transformCollection(Course::all())
+
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,6 +53,7 @@ class CoursesController extends Controller
     {
         //
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -56,15 +78,12 @@ class CoursesController extends Controller
 
         if(! $course)
         {
-            return response()->json([
-                'error' => [
-                    'message' => "resourse with that id not found"
-                ]
-            ], 404);
+            return $this->respondNotFound();
         }
-        return response()->json([
-            'data' => $this->transform($course->toArray())
-        ],200);
+
+        return $this->respond([
+            'data' => $this->courseTransformer->transform($course->toArray())
+        ]);
     }
 
     /**
@@ -102,29 +121,6 @@ class CoursesController extends Controller
     }
 
 
-    /**
-     *Transforms a collection
-     *
-     * @param array $courses
-     * @return array
-     */
-    private function transformCollection($courses = [])
-    {
-        return array_map([$this, 'transform'], $courses->toArray());
-    }
 
-    /**
-     * Transform a collection
-     *
-     * @param array $course
-     * @return array
-     */
-    private function transform($course = [])
-    {
-        return [
-            'title' => $course['title'],
-            'class' => $course['class'],
-            'description' => $course['description']
-        ];
-    }
+
 }
