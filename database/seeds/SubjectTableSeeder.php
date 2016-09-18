@@ -20,7 +20,7 @@ class SubjectTableSeeder extends Seeder
         {
             Subject::create([
 
-                'name' => $faker->title(),
+                'name' => $faker->paragraph(2, 5),
                 'description' => $faker->sentence(rand(6, 10), true),
                 'course_id' => rand(1, 10)
 
