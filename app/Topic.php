@@ -35,4 +35,25 @@ class Topic extends Model
         'created_at', 'updated_at', 'subject_id'
     ];
 
+    
+    /**
+     * creats a many to one relationship with subject model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subject()
+    {
+        return $this->belongsTo('App\Subject');
+    }
+
+
+    /**
+     * creats a one to many relation ship with question model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function question()
+    {
+        return $this->hasMany('App\Question');
+    }
 }

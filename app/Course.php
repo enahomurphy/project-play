@@ -35,4 +35,15 @@ class Course extends Model
         'created_at', 'updated_at', 'class_id'
     ];
 
+
+    /**
+     * creates a one to xmany relationship with subject model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subject()
+    {
+        return $this->hasMany('App\Subject');
+    }
+
 }

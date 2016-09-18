@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-
+use App\Question;
 
 class QuestionTableSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class QuestionTableSeeder extends Seeder
 
         foreach(range(1,500) as $index)
         {
-            Subject::create([
+            Question::create([
                 'title' => $faker->paragraph(rand(3, 6)),
                 'hint' => $faker->paragraph(rand(5, 10)),
                 'anwser' => $faker->paragraph(),
