@@ -27,6 +27,6 @@ class CreateSubjectTable extends Migration
      */
     public function down()
     {
-        Schema::drop('subject');
+        Schema::drop('subjects');
     }
 }

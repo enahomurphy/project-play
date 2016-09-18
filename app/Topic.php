@@ -35,7 +35,8 @@ class Topic extends Model
         'created_at', 'updated_at', 'subject_id'
     ];
 
-    
+
+
     /**
      * creats a many to one relationship with subject model
      *

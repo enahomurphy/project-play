@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Course;
+
 class CoursesController extends Controller
 {
     /**
@@ -15,7 +17,10 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        //
+
+        return response()->json([
+            'data' => $this->transformCollection(Course::all())
+        ], 200);
     }
 
     /**
@@ -36,7 +41,7 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -47,7 +52,19 @@ class CoursesController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::find($id);
+
+        if(! $course)
+        {
+            return response()->json([
+                'error' => [
+                    'message' => "resourse with that id not found"
+                ]
+            ], 404);
+        }
+        return response()->json([
+            'data' => $this->transform($course->toArray())
+        ],200);
     }
 
     /**
@@ -82,5 +99,32 @@ class CoursesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     *Transforms a collection
+     *
+     * @param array $courses
+     * @return array
+     */
+    private function transformCollection($courses = [])
+    {
+        return array_map([$this, 'transform'], $courses->toArray());
+    }
+
+    /**
+     * Transform a collection
+     *
+     * @param array $course
+     * @return array
+     */
+    private function transform($course = [])
+    {
+        return [
+            'title' => $course['title'],
+            'class' => $course['class'],
+            'description' => $course['description']
+        ];
     }
 }

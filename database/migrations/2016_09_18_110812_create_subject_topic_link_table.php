@@ -27,7 +27,7 @@ class CreateSubjectTopicLinkTable extends Migration
      */
     public function down()
     {
-        Schema::table('subjects', function (Blueprint $table) {
+        Schema::table('topics', function (Blueprint $table) {
             $table->dropForeign('topics_subject_id_foreign');
         });
     }
