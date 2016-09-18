@@ -16,6 +16,10 @@ class CreateQuestionTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('hint');
+            $table->string('anwser');
+            $table->text('details');
+            $table->string('info');
+            $table->text('pic');
             $table->timestamps();
         });
     }

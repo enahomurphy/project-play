@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Subject;
+use App\Topic;
 
-class SubjectTableSeeder extends Seeder
+class TopicTableSeeder extends Seeder
 {
 
     /**
@@ -16,15 +16,12 @@ class SubjectTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach(range(1,50) as $index)
+        foreach(range(1,100) as $index)
         {
-            Subject::create([
-
-                'name' => $faker->title(),
+            Topic::create([
+                'title' => $faker->paragraph(rand(3, 6)),
                 'description' => $faker->sentence(rand(6, 10), true),
-                'course_id' => rand(1, 10)
-
-
+                'subject_id' => rand(1, 50)
             ]);
         }
     }
