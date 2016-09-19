@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+//use App\Http\Requests;
 
 use App\Course;
 use App\Helper\Transformer\CourseTransformer;
+use App\Http\Requests\CourseRequest;
 
 class CoursesController extends ApiController
 {
@@ -25,6 +26,8 @@ class CoursesController extends ApiController
     public function __construct(CourseTransformer $courseTransformer)
     {
         $this->courseTransformer = $courseTransformer;
+
+//        $this->middleware('auth.basic');
     }
 
 
@@ -36,35 +39,36 @@ class CoursesController extends ApiController
     public function index()
     {
 
-        return $this->respond([
-
-            'data' => $this->courseTransformer->transformCollection(Course::all())
-
-        ]);
+//        return $this->respond([
+//
+//            'data' => $this->courseTransformer->transformCollection(Course::all())
+//
+//        ]);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CourseRequest $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
 
+//        $data =  Course::create($request->all());
+//        dd(['dddd']);
+//        return $this->setStatusCode(201)
+//            ->respond([
+//                'status' => 'success',
+//                'message' => 'resource created'
+//            ]);
     }
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -86,6 +90,8 @@ class CoursesController extends ApiController
         ]);
     }
 
+
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -97,6 +103,8 @@ class CoursesController extends ApiController
         //
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -106,8 +114,10 @@ class CoursesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -81,6 +81,7 @@ class SubjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
     }
 }
