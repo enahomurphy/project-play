@@ -12,7 +12,7 @@ class CreateSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('subject', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
@@ -27,6 +27,6 @@ class CreateSubjectTable extends Migration
      */
     public function down()
     {
-        Schema::drop('subject');
+        Schema::drop('subjects');
     }
 }
