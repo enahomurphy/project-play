@@ -3,8 +3,10 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopicQuestionLinkTable extends Migration
+class CreateTopicQuestionTable extends Migration
 {
+
+
     /**
      * Run the migrations.
      *
@@ -12,12 +14,15 @@ class CreateTopicQuestionLinkTable extends Migration
      */
     public function up()
     {
-        Schema::table('questions', function (Blueprint $table) {
+        Schema::create('topic_question', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('topic_id')->unsigned();
             $table->foreign('topic_id')->references('id')->on('topics');
+            $table->integer('question_id')->unsigned();
+            $table->foreign('question_id')->references('id')->on('questions');
+            $table->timestamps();
         });
     }
-
 
 
     /**
@@ -27,10 +32,7 @@ class CreateTopicQuestionLinkTable extends Migration
      */
     public function down()
     {
-        Schema::table('questions', function (Blueprint $table) {
-            $table->dropForeign('questions_topic_id_foreign');
-        });
+        Schema::drop('topic_subject');
     }
 
 }
-

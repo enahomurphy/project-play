@@ -20,7 +20,7 @@ class CourseTableSeeder extends Seeder
         {
             Course::create([
 
-                'title' => $faker->paragraph(1,2),
+                'title' => $faker->sentence(rand(2, 3)),
                 'class' => $faker->randomElement(['ss1', 'ss2', 'ss3']),
                 'description' => $faker->paragraph(rand(5, 10), true)
 

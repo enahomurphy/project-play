@@ -9,3 +9,5 @@ Route::get('/', function () {
 });
 
 Route::resource('/courses', 'CoursesController');
+Route::resource('/topics', 'TopicsController');
+Route::resource('/topics.subject', 'QuestionsController');

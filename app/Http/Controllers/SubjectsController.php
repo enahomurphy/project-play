@@ -6,8 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class SubjectsController extends Controller
+class SubjectsController extends ApiController
 {
+
+    private $subjectTransformer;
+
+
+    /**
+     * SubjectsController constructor.
+     * @param $subjectTransformer
+     */
+    public function __construct($subjectTransformer)
+    {
+        $this->subjectTransformer = $subjectTransformer;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +29,7 @@ class SubjectsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -25,7 +39,7 @@ class SubjectsController extends Controller
      */
     public function create()
     {
-        //
+        return $this->
     }
 
     /**

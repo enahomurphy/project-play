@@ -22,7 +22,7 @@ class Question extends Model
      * @var array
      */
     protected  $fillable = [
-        'title', 'hint', 'answer', 'details', 'info', 'pic', 'topic_id'
+        'title', 'hint', 'answer', 'details', 'info', 'pic'
     ];
 
 
@@ -32,7 +32,7 @@ class Question extends Model
      * @var array
      */
     protected  $hidden = [
-        'created_at', 'updated_at', 'topic_id'
+        'created_at', 'updated_at'
     ];
 
 

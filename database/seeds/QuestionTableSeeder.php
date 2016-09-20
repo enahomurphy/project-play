@@ -16,17 +16,15 @@ class QuestionTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach(range(1,500) as $index)
+        foreach(range(1,100) as $index)
         {
             Question::create([
-                'title' => $faker->paragraph(rand(3, 6)),
+                'title' => $faker->sentence(rand(2, 3)),
                 'hint' => $faker->paragraph(rand(5, 10)),
                 'anwser' => $faker->paragraph(),
                 'details' => $faker->sentence(20, 40),
                 'info' => $faker->url(),
-                'pic' => $faker->imageUrl(),
-                'topic_id' => rand(1, 100)
-
+                'pic' => $faker->imageUrl()
             ]);
         }
 

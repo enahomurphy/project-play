@@ -66,6 +66,20 @@ class ApiController extends Controller
 
 
     /**
+     * @param string $message
+     * @return mixed
+     */
+    public function respondResourceCreated($message = "resource successfully created")
+    {
+        return $this->setStatusCode(201)->respond(array(
+            'success' => true,
+            'message' => $message,
+            'status_code' => $this->getStatusCode()
+        ));
+
+    }
+
+    /**
      * error response
      *
      * @param string $message
@@ -78,6 +92,20 @@ class ApiController extends Controller
                 'message' => $message,
                 'status_code' => $this->getStatusCode()
             ]
+        ]);
+    }
+
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function respondResourseFound($data = [])
+    {
+        return $this->setStatusCode(200)->respond([
+            'success' => true,
+            'data' => $data,
+            'statu_code' => $this->getStatusCode()
         ]);
     }
 

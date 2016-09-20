@@ -39,11 +39,11 @@ class CoursesController extends ApiController
     public function index()
     {
 
-//        return $this->respond([
-//
-//            'data' => $this->courseTransformer->transformCollection(Course::all())
-//
-//        ]);
+        return $this->respond([
+
+            'data' => $this->courseTransformer->transformCollection(Course::all())
+
+        ]);
     }
 
 
@@ -57,16 +57,13 @@ class CoursesController extends ApiController
     public function store(CourseRequest $request)
     {
 
-//        $data =  Course::create($request->all());
-//        dd(['dddd']);
-//        return $this->setStatusCode(201)
-//            ->respond([
-//                'status' => 'success',
-//                'message' => 'resource created'
-//            ]);
+        Course::create($request->all());
+
+        return $this->setStatusCode(201)->respond([
+                'status' => 'success',
+                'message' => 'resource created'
+            ]);
     }
-
-
 
 
 
@@ -81,27 +78,11 @@ class CoursesController extends ApiController
         $course = Course::find($id);
 
         if(! $course)
-        {
             return $this->respondNotFound();
-        }
 
-        return $this->respond([
-            'data' => $this->courseTransformer->transform($course->toArray())
-        ]);
+        return $this->respond(['data' => $this->courseTransformer->transform($course->toArray())]);
     }
 
-
-    
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
 
 
@@ -114,6 +95,13 @@ class CoursesController extends ApiController
      */
     public function update(Request $request, $id)
     {
+        $course = Course::find($id);
+
+        if(! $course)
+            return $this->respondNotFound("course not found");
+
+        $course->fill($request->input())->save();
+        return $this->setStatusCode(201)->respondResourceCreated("course has been updated");
 
     }
 
@@ -127,7 +115,13 @@ class CoursesController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        $course = Course::find($id);
+
+        if(! $course)
+            return $this->respondNotFound("course not found");
+
+        $course->delete();
+        return $this->respondResourceCreated("course has been deleted");
     }
 
 

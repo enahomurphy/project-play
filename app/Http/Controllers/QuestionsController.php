@@ -2,12 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Transformer\QuestionTransformer;
+use App\Question;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Questionl;
 
-class QuestionsController extends Controller
+class QuestionsController extends ApiController
 {
+
+    private $questionTransfomoer;
+
+    /**
+     * QuestionsController constructor.
+     * @param $questionTransfomoer
+     */
+    public function __construct(QuestionTransformer $questionTransfomoer)
+    {
+        $this->questionTransfomoer = $questionTransfomoer;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +31,14 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        //
+        return $this->respond([
+
+                'data' => $this->questionTransfomoer->transformCollection(Question::all())
+
+            ]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
