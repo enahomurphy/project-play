@@ -2,23 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Transformer\SubjectTransformer;
+use App\Subject;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\SubjectRequest;
 
 class SubjectsController extends ApiController
 {
 
+    /**
+     * @var SubjectTransformer
+     */
     private $subjectTransformer;
+
+    /**
+     * @var
+     */
+    private $model;
 
 
     /**
      * SubjectsController constructor.
-     * @param $subjectTransformer
+     * @param SubjectTransformer $subjectTransformer
+     * @param Subject $model
+     * @internal param Subject $subject
      */
-    public function __construct($subjectTransformer)
+    public function __construct(SubjectTransformer $subjectTransformer, Subject $model)
     {
         $this->subjectTransformer = $subjectTransformer;
+        $this->model = $model;
     }
 
 
@@ -29,62 +43,47 @@ class SubjectsController extends ApiController
      */
     public function index()
     {
-
+        return $this->respondResource($this->subjectTransformer->transformCollection($this->model->all()));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return $this->
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param SubjectRequest $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(SubjectRequest $request)
     {
-        //
+        Subject::create($request->all());
+
+        return $this->respondResourceCreated();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Subject $subject
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Subject $subject, $id)
     {
-        //
+        return $this->showResource($subject, $id, $this->subjectTransformer );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int $id
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @internal param Subject $subject
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        return $this->updateResource($this->model, $id, $request);
     }
 
     /**
@@ -95,7 +94,7 @@ class SubjectsController extends ApiController
      */
     public function destroy($id)
     {
-
-
+        return $this->deleteResource($this->model, $id);
     }
+
 }

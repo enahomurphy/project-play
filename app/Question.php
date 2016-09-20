@@ -41,19 +41,9 @@ class Question extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public  function course()
+    public  function topic()
     {
-        return $this->belongsTo('App\Course');
-    }
-
-    /**
-     * creates a one to many relationship with topics
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function topic()
-    {
-        return $this->hasMany('App\Topic');
+        return $this->belongsTo('App\Topic');
     }
 
 

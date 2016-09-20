@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Helper\Transformer\TopicTransformer;
+use App\Subject;
 use App\Topic;
+use App\TopicQuestion;
 use Illuminate\Http\Request;
 use App\Http\Requests\TopicRequest;
 use App\Http\Requests;
 
 class TopicsController extends ApiController
 {
+
+    private $model;
+
 
     /**
      * @var TopicTransformer
@@ -19,11 +24,13 @@ class TopicsController extends ApiController
 
     /**
      * TopicsController constructor.
-     * @param $topicTransformer
+     * @param TopicTransformer $topicTransformer
+     * @param Topic $model
      */
-    public function __construct(TopicTransformer $topicTransformer)
+    public function __construct(TopicTransformer $topicTransformer, Topic $model)
     {
         $this->topicTransformer = $topicTransformer;
+        $this->model = $model;
     }
 
 
@@ -34,9 +41,7 @@ class TopicsController extends ApiController
      */
     public function index()
     {
-        return $this->respond([
-            'data' => $this->topicTransformer->transformCollection(Topic::all())
-        ]);
+        return $this->respondResource($this->topicTransformer->transformCollection($this->model->all()));
     }
 
 
@@ -62,12 +67,7 @@ class TopicsController extends ApiController
      */
     public function show($id)
     {
-        $topic = Topic::find($id);
-        if(! $topic)
-            return $this->respondNotFound();
-
-       return $this->respondResourseFound($this->topicTransformer->transform($topic));
-
+       return $this->showResource($this->model, $id, $this->topicTransformer);
     }
 
 
@@ -80,14 +80,9 @@ class TopicsController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        $topic = Course::find($id);
-        if(! $topic)
-            return $this->respondNotFound();
-
-        $topic->fill($request->input())->save();
-        return $this->respondResourceCreated("topic has been updated");
-
+        return $this->updateResource($this->model, $id, $request);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -97,11 +92,6 @@ class TopicsController extends ApiController
      */
     public function destroy($id)
     {
-        $topic = Course::find($id);
-        if(! $topic)
-            return $this->respondNotFound();
-
-       $topic->delete()->save();
-        return $this->respondResourceCreated("topic has been updated");
+       return $this->deleteResource($this->model, $id);
     }
 }

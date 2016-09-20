@@ -14,7 +14,9 @@ class CreateSubjectCourseLinkTable extends Migration
     {
         Schema::table('subjects', function (Blueprint $table) {
             $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
         });
     }
 

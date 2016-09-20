@@ -41,7 +41,7 @@ class Subject extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public  function course()
+      public  function course()
     {
         return $this->belongsTo('App\Course');
     }

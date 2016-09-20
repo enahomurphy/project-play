@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class TopicRequest extends Request
+class TopicRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,18 +28,5 @@ class TopicRequest extends Request
             'destription' => 'string',
             'subject_id' => 'required|integer'
         ];
-    }
-
-    public function response(array $errors)
-    {
-        return response()->json([
-            'status' => 'failed',
-            'error'  => [
-                'message' => "failed to validate fields",
-                'errors' => $errors,
-                'status_code' => 422
-
-            ]
-        ], 422);
     }
 }

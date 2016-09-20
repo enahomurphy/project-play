@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: intel
- * Date: 9/20/2016
- * Time: 12:58 AM
- */
+
 
 namespace App\Helper\Transformer;
 
@@ -16,10 +11,14 @@ class SubjectTransformer extends Transfomer
      *  method to be implemented
      *
      * @param array $item
-     * @return mixed
+     * @return array
      */
     public function transform(array $item)
     {
-        // TODO: Implement transform() method.
+        return [
+            'name' => $item['name'],
+            'description' => $item['description'],
+            'course_id' => $item['course_id']
+        ];
     }
 }

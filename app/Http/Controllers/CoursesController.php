@@ -14,20 +14,29 @@ class CoursesController extends ApiController
 {
 
 
+    /**
+     * @var CourseTransformer
+     */
     private $courseTransformer;
+
+    /**
+     * @var
+     */
+    private $model;
 
 
     /**
      *
      *
      * CoursesController constructor.
-     * @param $courseTransformer
+     * @param CourseTransformer $courseTransformer
+     * @param Course $model
      */
-    public function __construct(CourseTransformer $courseTransformer)
+    public function __construct(CourseTransformer $courseTransformer, Course $model)
     {
         $this->courseTransformer = $courseTransformer;
 
-//        $this->middleware('auth.basic');
+        $this->model = $model;
     }
 
 
@@ -38,12 +47,7 @@ class CoursesController extends ApiController
      */
     public function index()
     {
-
-        return $this->respond([
-
-            'data' => $this->courseTransformer->transformCollection(Course::all())
-
-        ]);
+        return $this->respondResource($this->courseTransformer->transformCollection($this->model->all()));
     }
 
 
@@ -56,13 +60,9 @@ class CoursesController extends ApiController
      */
     public function store(CourseRequest $request)
     {
-
         Course::create($request->all());
 
-        return $this->setStatusCode(201)->respond([
-                'status' => 'success',
-                'message' => 'resource created'
-            ]);
+        return $this->setStatusCode(201)->respondResourceCreated("course created");
     }
 
 
@@ -75,12 +75,7 @@ class CoursesController extends ApiController
      */
     public function show($id)
     {
-        $course = Course::find($id);
-
-        if(! $course)
-            return $this->respondNotFound();
-
-        return $this->respond(['data' => $this->courseTransformer->transform($course->toArray())]);
+        return $this->showResource($this->model, $id, $this->courseTransformer);
     }
 
 
@@ -95,14 +90,7 @@ class CoursesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        $course = Course::find($id);
-
-        if(! $course)
-            return $this->respondNotFound("course not found");
-
-        $course->fill($request->input())->save();
-        return $this->setStatusCode(201)->respondResourceCreated("course has been updated");
-
+        return $this->updateResource($this->model, $id, $request);
     }
 
 
@@ -115,13 +103,7 @@ class CoursesController extends ApiController
      */
     public function destroy($id)
     {
-        $course = Course::find($id);
-
-        if(! $course)
-            return $this->respondNotFound("course not found");
-
-        $course->delete();
-        return $this->respondResourceCreated("course has been deleted");
+        return $this->deleteResource($this->model, $id);
     }
 
 

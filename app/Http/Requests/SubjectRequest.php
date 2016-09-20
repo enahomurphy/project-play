@@ -4,18 +4,16 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CourseRequest extends ApiRequest
+class SubjectRequest extends ApiRequest
 {
-
-
-
     /**
      * Determine if the user is authorized to make this request.
      *
+     * @return bool
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,11 +24,11 @@ class CourseRequest extends ApiRequest
     public function rules()
     {
         return [
-            'title' => 'required|',
-            'destription' => 'string|',
-            'class' => 'required|in:ss1,ss2,ss3'
+            'name' => 'required|',
+            'description' => 'string',
+            'course_id' => 'required|unique:coures,id'
+
         ];
     }
-
-
 }
+

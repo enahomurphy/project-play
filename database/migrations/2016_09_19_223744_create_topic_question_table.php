@@ -17,9 +17,9 @@ class CreateTopicQuestionTable extends Migration
         Schema::create('topic_question', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('topic_id')->unsigned();
-            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade')->onupDatte('cascade');
             $table->integer('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade')->onupDatte('cascade');
             $table->timestamps();
         });
     }
