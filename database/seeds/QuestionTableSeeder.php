@@ -24,7 +24,8 @@ class QuestionTableSeeder extends Seeder
                 'anwser' => $faker->paragraph(),
                 'details' => $faker->sentence(20, 40),
                 'info' => $faker->url(),
-                'pic' => $faker->imageUrl()
+                'pic' => $faker->imageUrl(),
+                'topic_id' => $faker->randomElement(range(1,15))
             ]);
         }
 

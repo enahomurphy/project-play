@@ -22,7 +22,7 @@ class Question extends Model
      * @var array
      */
     protected  $fillable = [
-        'title', 'hint', 'answer', 'details', 'info', 'pic'
+        'title', 'hint', 'answer', 'details', 'info', 'pic', 'topic_id'
     ];
 
 

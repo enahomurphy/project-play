@@ -14,13 +14,9 @@ class CreateTopicQuestionTable extends Migration
      */
     public function up()
     {
-        Schema::create('topic_question', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::table('questions', function (Blueprint $table) {
             $table->integer('topic_id')->unsigned();
-            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade')->onupDatte('cascade');
-            $table->integer('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade')->onupDatte('cascade');
-            $table->timestamps();
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade')->onupDatte('cascade');;
         });
     }
 
@@ -32,7 +28,9 @@ class CreateTopicQuestionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('topic_subject');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->dropForeign('questions_topic_id_foreign');
+        });
     }
 
 }

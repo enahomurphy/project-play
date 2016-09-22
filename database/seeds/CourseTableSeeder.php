@@ -16,7 +16,7 @@ class CourseTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach(range(1, 10) as $index)
+        foreach(range(1, 2) as $index)
         {
             Course::create([
 

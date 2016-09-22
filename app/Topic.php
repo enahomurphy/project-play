@@ -48,6 +48,8 @@ class Topic extends Model
     }
 
 
+
+
     /**
      * creats a one to many relation ship with question model
      *

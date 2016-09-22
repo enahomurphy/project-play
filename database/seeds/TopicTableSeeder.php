@@ -16,7 +16,7 @@ class TopicTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach(range(1,100) as $index)
+        foreach(range(1,15) as $index)
         {
             Topic::create([
                 'title' => $faker->paragraph(rand(3, 6)),

@@ -190,5 +190,37 @@ class ApiController extends Controller
     }
 
 
+//    /**
+//     * @param $Tclass
+//     * @param $Qclass
+//     * @param $topicId
+//     * @param $questionId
+//     * @return mixed
+//     */
+//    public function findTopicQuestion($Tclass, $Qclass, $topicId, $questionId)
+//    {
+//        $topic = $this->findResource($Tclass, $topicId);
+//        $question = $this->findResource($Qclass, $questionId);
+//
+//        if(! $topic || !$question)
+//        {
+//
+//        }
+//
+//
+//    }
+//
+//
+//    private function findResource($class, $id)
+//    {
+//        $resource = $class::find($id);
+//
+//        if(! $resource)
+//            return false;
+//
+//        return $resource;
+//    }
+//
+
 }
 

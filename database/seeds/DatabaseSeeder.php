@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         Subject::truncate();
         Topic::truncate();
         Question::truncate();
-        TopicQuestion::truncate();
+//        TopicQuestion::truncate();
 
 
         $this->call(TopicTableSeeder::class);
@@ -33,6 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CourseTableSeeder::class);
         $this->call(SubjectTableSeeder::class);
 
-        $this->call(TopicQuestionTableSeeder::class);
+//        $this->call(TopicQuestionTableSeeder::class);
     }
 }
